@@ -10,7 +10,9 @@
     </dev-avonale-input>
   </div>
   <!-- Card -->
-  <div class="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-6">
+  <div
+    class="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6"
+  >
     @for(repositorie of filteredRepositories; track repositorie.id) {
     <dev-avonale-cards
       [img]="repositorie.owner.avatar_url"
@@ -27,6 +29,12 @@
     ></dev-avonale-cards>
     }
   </div>
+</div>
+<div
+  class="text-center mt-6 font-mono text-grey-01 font-semibold text-sm"
+  *ngIf="!repositories.length"
+>
+  NENHUM REPOSITÓRIO ENCONTRADO
 </div>
 <!--Modal-->
 <dialog #modalUser class="modal">
