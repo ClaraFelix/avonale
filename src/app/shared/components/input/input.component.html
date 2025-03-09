@@ -1,0 +1,12 @@
+<div class="relative">
+  <div class="flex absolute inset-y-0 left-0 items-center pl-6">
+    <ng-content></ng-content>
+  </div>
+  <input
+    class="w-full bg-white shadow text-gray-600 px-3 pl-14 py-3 font-mono border rounded-b-lg outline-none focus:shadow-md disabled:border-neutral disabled:bg-neutral transition-all duration-150 ease-in-out"
+    [type]="type"
+    [placeholder]="placeholder"
+    [(ngModel)]="value"
+    (input)="onInputChange($event)"
+  />
+</div>

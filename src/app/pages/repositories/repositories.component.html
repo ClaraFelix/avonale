@@ -1,0 +1,73 @@
+<div class="p-12">
+  <!--Input-->
+  <div class="w-full pb-12">
+    <dev-avonale-input
+      placeholder="Buscar repositório"
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="onSearchChange($event)"
+    >
+      <i class="bi bi-search text-gray-600" aria-hidden="true"></i>
+    </dev-avonale-input>
+  </div>
+  <!-- Card -->
+  <div class="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-6">
+    @for(repositorie of filteredRepositories; track repositorie.id) {
+    <dev-avonale-cards
+      [img]="repositorie.owner.avatar_url"
+      [title]="repositorie.full_name"
+      [name]="repositorie.name"
+      [description]="repositorie.description"
+      [created_at]="repositorie.created_at"
+      [avatar_url]="repositorie.owner.avatar_url"
+      [stars]="repositorie.stargazers_count"
+      [private]="repositorie.private"
+      [repoUrl]="repositorie.html_url"
+      [owner]="repositorie.owner"
+      (userClicked)="openUserModal(repositorie)"
+    ></dev-avonale-cards>
+    }
+  </div>
+</div>
+<!--Modal-->
+<dialog #modalUser class="modal">
+  <div class="modal-box bg-white">
+    <form method="dialog">
+      <button
+        class="btn btn-sm bg-white shadow-lg text-gray-700 btn-ghost absolute right-2 top-2"
+        (click)="closeModal()"
+      >
+        ✕
+      </button>
+    </form>
+    <div class="p-6" *ngIf="selectedUser">
+      <img
+        [src]="selectedUser.owner.avatar_url"
+        class="mx-auto rounded-full h-24 w-24"
+        alt="avatar user"
+      />
+      <p class="text-lg font-bold text-center text-gray-600">
+        {{ selectedUser.name }}
+      </p>
+      <p class="text-lg font-bold text-center text-gray-600">
+        {{ selectedUser.owner.login }}
+      </p>
+      <div class="py-3">
+        <hr />
+      </div>
+      <div>
+        <a
+          [href]="selectedUser.owner.html_url"
+          target="_blank"
+          class="text-blue-500 flex gap-2"
+        >
+          <strong class="text-gray-600">Url do perfil:</strong>
+          <p class="hover:underline">{{ selectedUser.owner.html_url }}</p>
+        </a>
+        <p class="text-lg font-bold text-gray-600">
+          ID:
+          <span class="text-gray-500 font-normal">{{ selectedUser.id }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</dialog>

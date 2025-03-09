@@ -1,0 +1,54 @@
+<div
+  class="bg-white w-[250px] h-[400px] mx-auto rounded-md shadow-md justify-center"
+>
+  <img
+    [src]="img"
+    class="h-[200px] w-full object-fill rounded-t-lg"
+    alt="Imagem do repositório"
+  />
+  <div class="p-5">
+    <div class="flex justify-between gap-2">
+      <p
+        class="text-gray-600 text-lg font-bold cursor-pointer break-all"
+        (click)="openRepoUrl()"
+      >
+        {{ title }}
+      </p>
+      @if(private === false){
+      <i class="bi bi-people-fill text-gray-600"></i>
+      } @else{
+      <i class="bi bi-lock text-gray-600"></i>
+      }
+    </div>
+    <p class="text-gray-500 text-sm pb-1 line-clamp-1">{{ description }}</p>
+    <div class="stars">
+      <ng-container *ngFor="let star of starRatings">
+        <i
+          class="bi"
+          [ngClass]="star ? 'bi-star-fill' : 'bi-star'"
+          style="color: gold"
+        ></i>
+      </ng-container>
+    </div>
+    <div class="flex items-center gap-2 pt-2">
+      <img
+        [src]="avatar_url"
+        class="h-10 w-10 rounded-full"
+        alt="Avatar do dono"
+      />
+      <div class="text-gray-600 cursor-point">
+        <button class="font-bold bg-none text-sm" (click)="openUserModal()">
+          {{ name }}
+        </button>
+        <p class="text-sm">
+          em
+          {{
+            created_at
+              ? (created_at | date : "dd/MM/yyyy")
+              : "Data não disponível"
+          }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
